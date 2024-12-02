@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg
+*.egg-info
+dist/
+build/
+
+# Virtual environment
+venv/
+env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Pytest cache
+.cache/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+
+# Docker files
+Dockerfile*
+.dockerignore
+
+# Secrets (par exemple, .env, clé API)
+.env
+*.key
+*.pem
+
+# SQLite database file (si vous utilisez SQLite)
+data.db
+
+# Airflow logs (si vous utilisez Airflow dans le projet)
+airflow_logs/
+
+# System files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,32 @@
+# Ignorer les fichiers Python compilés
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorer les environnements virtuels
+venv/
+env/
+
+# Ignorer les fichiers de configuration des IDE
+.vscode/
+.idea/
+
+# Ignorer les fichiers système
+.DS_Store
+Thumbs.db
+
+# Ignorer les fichiers de tests et logs
+*.log
+*.test
+
+# Ignorer les bases de données locales
+data.db
+
+# Ignorer le dossier de logs d'Airflow
+airflow_logs/
+
+# Ignorer les secrets et fichiers de configuration (ex: .env)
+.env
+*.key
+*.pem
