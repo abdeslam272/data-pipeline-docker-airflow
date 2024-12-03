@@ -6,7 +6,7 @@
 
 # Structure du projet
 ``` plaintext
-project-root/
+data-pipeline-docker-airflow/
 │
 ├── airflow/
 │   ├── dags/
