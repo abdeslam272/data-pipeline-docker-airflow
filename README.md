@@ -6,7 +6,6 @@
 
 # Structure du projet
 ``` plaintext
-Copier le code
 project-root/
 │
 ├── airflow/
