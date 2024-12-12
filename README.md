@@ -27,3 +27,7 @@ data-pipeline-docker-airflow/
 ├── Dockerfile               # Conteneur principal pour vos scripts Python
 └── README.md                # Documentation du projet
 ```
+
+
+# Sécurisation de la clé API
+Pour éviter d'exposer des informations sensibles, comme la clé API, ne la codez jamais directement dans le fichier source. Stockez-la plutôt dans une variable d'environnement ou un fichier .env, et chargez-la à l'aide d'une bibliothèque comme python-dotenv. Assurez-vous que le fichier .env est ajouté à .gitignore pour éviter tout upload accidentel sur GitHub. Cette pratique protège vos identifiants et renforce la sécurité de votre application.
