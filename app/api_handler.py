@@ -1,17 +1,38 @@
+import os
 import requests
+from dotenv import load_dotenv
 
-API_URL = "https://api.openweathermap.org/data/2.5/weather"
-API_KEY = "votre_api_key"  # Inscrivez-vous pour une clé API gratuite
+# Load environment variables
+load_dotenv()
 
-def fetch_weather(city):
-    params = {"q": city, "appid": API_KEY, "units": "metric"}
-    response = requests.get(API_URL, params=params)
-    if response.status_code == 200:
+API_URL = "https://api.openweathermap.org/data/2.5/forecast"
+API_KEY = os.getenv("OPENWEATHER_API_KEY")  # Secure the API key
+
+def fetch_forecast(lat, lon):
+    """Fetches a 5-day weather forecast for the given coordinates."""
+    params = {
+        "lat": lat,
+        "lon": lon,
+        "appid": API_KEY,
+        "units": "metric",
+        "lang": "en"
+    }
+    
+    try:
+        response = requests.get(API_URL, params=params)
+        response.raise_for_status()  # Raise HTTPError for bad responses
         data = response.json()
-        print(f"Weather in {city}:")
-        print(f"Temperature: {data['main']['temp']}°C")
-        print(f"Humidity: {data['main']['humidity']}%")
-    else:
-        print(f"Error: {response.status_code}, {response.text}")
 
-fetch_weather("Paris")
+        print(f"5-day Forecast for coordinates ({lat}, {lon}):")
+        for forecast in data["list"][:5]:  # Limit to first 5 forecasts
+            time = forecast["dt_txt"]
+            temp = forecast["main"]["temp"]
+            weather = forecast["weather"][0]["description"]
+            print(f"{time} - Temp: {temp}°C, Weather: {weather.capitalize()}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+    except KeyError:
+        print("Error: Unexpected response format")
+
+# Example: Coordinates for Paris
+fetch_forecast(lat=48.8566, lon=2.3522)
