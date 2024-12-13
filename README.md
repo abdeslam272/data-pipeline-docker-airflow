@@ -31,3 +31,6 @@ data-pipeline-docker-airflow/
 
 # Sécurisation de la clé API
 Pour éviter d'exposer des informations sensibles, comme la clé API, ne la codez jamais directement dans le fichier source. Stockez-la plutôt dans une variable d'environnement ou un fichier .env, et chargez-la à l'aide d'une bibliothèque comme python-dotenv. Assurez-vous que le fichier .env est ajouté à .gitignore pour éviter tout upload accidentel sur GitHub. Cette pratique protège vos identifiants et renforce la sécurité de votre application.
+
+# Que doit contenir un fichier docker-compose.yml ?
+Un fichier docker-compose.yml définit les services, réseaux et volumes de votre application. Chaque service spécifie un conteneur, son image ou le contexte de build, les ports, les variables d'environnement et les dépendances. Les réseaux permettent la communication entre les services, et les volumes assurent la persistance des données. Il simplifie la gestion des configurations multi-conteneurs et le déploiement des applications.
