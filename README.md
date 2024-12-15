@@ -37,3 +37,11 @@ Un fichier docker-compose.yml définit les services, réseaux et volumes de votr
  
 # Configure une tâche Airflow pour appeler api_handler.py périodiquement.
 This Airflow DAG, named simple_weather_pipeline, is scheduled to run every hour starting from December 14, 2024. It uses the BashOperator to execute a Python script (api_handler.py) located at /app/api_handler.py. The DAG is configured with retry logic (1 retry after a 5-minute delay) and catchup=False to avoid backfilling past runs. Default arguments specify that tasks do not depend on previous runs, and the workflow is suitable for automating API data collection or similar periodic tasks.
+
+# Erreurs d'Airflow :
+Après avoir lancé les conteneurs à l'aide du fichier docker-compose situé dans le dossier airflow :
+![image](https://github.com/user-attachments/assets/eef376f6-16ca-4868-90ca-2dd84569dff7)
+J'observe une erreur récurrente dans les deux conteneurs suivants : airflow-scheduler-1 et airflow-webserver-1.
+L'erreur est la suivante : ![image](https://github.com/user-attachments/assets/975b4058-4860-4717-9941-4ede319739e1)
+
+
