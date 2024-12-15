@@ -10,7 +10,9 @@ services:
       - "5432:5432"
 
   webserver:
-    image: apache/airflow:2.7.2
+    build: 
+      context: .
+      dockerfile: Dockerfile
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__CORE__FERNET_KEY: "my-fernet-key"
@@ -25,7 +27,9 @@ services:
     - ./app:/app
 
   scheduler:
-    image: apache/airflow:2.7.2
+    build: 
+      context: .
+      dockerfile: Dockerfile
     depends_on:
       - webserver
       - postgres
