@@ -13,6 +13,7 @@ data-pipeline-docker-airflow/
 │   │   ├── etl_pipeline.py  # Le DAG Airflow pour orchestrer l'ETL
 │   │
 │   ├── docker-compose.yml   # Fichier Docker-Compose pour configurer Airflow
+│   ├── Dockerfile   # Conteneur principal pour Airflow
 │   └── requirements.txt     # Dépendances Python pour Airflow
 │
 ├── app/
