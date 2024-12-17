@@ -5,12 +5,14 @@ def clean_and_transform():
         data = json.load(file)
 
     # Exemple : simplifiez la structure des données
-    cleaned_data = {
-        "city": data["name"],
-        "temperature": data["main"]["temp"],
-        "humidity": data["main"]["humidity"],
-        "weather": data["weather"][0]["description"],
-    }
+    cleaned_data = []
+    for forecast in data["list"]:
+        cleaned_data.append({
+            "time": forecast["dt_txt"],
+            "temperature": forecast["main"]["temp"],
+            "humidity": forecast["main"]["humidity"],
+            "weather": forecast["weather"][0]["description"],
+        })
 
     with open("data/cleaned_data.json", "w") as file:
         json.dump(cleaned_data, file)
