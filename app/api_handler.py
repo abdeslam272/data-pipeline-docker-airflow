@@ -9,7 +9,7 @@ API_URL = "https://api.openweathermap.org/data/2.5/forecast"
 API_KEY = os.getenv("OPENWEATHER_API_KEY")  # Secure the API key
 
 def fetch_forecast(lat, lon):
-    """Fetches a 5-day weather forecast for the given coordinates."""
+    """Fetches weather forecast for the given coordinates."""
     params = {
         "lat": lat,
         "lon": lon,
@@ -23,8 +23,8 @@ def fetch_forecast(lat, lon):
         response.raise_for_status()  # Raise HTTPError for bad responses
         data = response.json()
 
-        print(f"5-day Forecast for coordinates ({lat}, {lon}):")
-        for forecast in data["list"][:5]:  # Limit to first 5 forecasts
+        print(f"Forecast for coordinates ({lat}, {lon}):")
+        for forecast in data["list"]:  
             time = forecast["dt_txt"]
             temp = forecast["main"]["temp"]
             weather = forecast["weather"][0]["description"]

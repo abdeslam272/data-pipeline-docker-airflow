@@ -1,11 +1,30 @@
-version: '3.9'
-
 services:
   python-app:
     build: 
-     context: .
+      context: .
     container_name: python-app
+    depends_on:
+      - postgres  # Ensure postgres is up before the python app starts
+    environment:
+      - DB_HOST=postgres
+      - DB_NAME=airflow_db
+      - DB_USER=airflow
+      - DB_PASSWORD=airflow
     volumes:
-      - ./app:/app  # Monte uniquement le dossier app
+      - ./app:/app
     env_file:
-      - .env        # Charge le fichier d'environnement
+      - .env
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_USER=airflow
+      - POSTGRES_DB=airflow_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

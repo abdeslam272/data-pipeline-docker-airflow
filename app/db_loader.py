@@ -15,17 +15,19 @@ def load_to_db():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS weather_data (
-            city TEXT,
+            time TIMESTAMP,
             temperature FLOAT,
             humidity INT,
             weather TEXT
         )
     """)
 
-    cursor.execute("""
-        INSERT INTO weather_data (city, temperature, humidity, weather)
-        VALUES (%s, %s, %s, %s)
-    """, (data["city"], data["temperature"], data["humidity"], data["weather"]))
+    # Insérer chaque enregistrement de la donnée transformée
+    for entry in data:
+        cursor.execute("""
+            INSERT INTO weather_data (time, temperature, humidity, weather)
+            VALUES (%s, %s, %s, %s)
+        """, (entry["time"], entry["temperature"], entry["humidity"], entry["weather"]))
 
     conn.commit()
     cursor.close()
