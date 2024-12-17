@@ -46,4 +46,4 @@ Après avoir lancé les conteneurs à l'aide du fichier docker-compose situé da
 J'observe une erreur récurrente dans les deux conteneurs suivants : airflow-scheduler-1 et airflow-webserver-1.
 L'erreur est la suivante : ![image](https://github.com/user-attachments/assets/975b4058-4860-4717-9941-4ede319739e1)
 
-
+la solution: ajout d'un dockerfile qui contient RUN airflow db init
