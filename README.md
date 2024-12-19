@@ -47,3 +47,8 @@ J'observe une erreur récurrente dans les deux conteneurs suivants : airflow-sch
 L'erreur est la suivante : ![image](https://github.com/user-attachments/assets/975b4058-4860-4717-9941-4ede319739e1)
 
 la solution: ajout d'un dockerfile qui contient RUN airflow db init
+
+# Erreurs de conteneur postgres :
+On a une erreur qui se répéte liée au container postgres : 
+![image](https://github.com/user-attachments/assets/2a19fe93-9f43-461d-8ada-7ce73de5c5ff)
+
