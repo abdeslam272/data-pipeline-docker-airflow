@@ -53,3 +53,49 @@ Solution: J'utilise pgAdmin pour intéragir avec la base de données, pas de nav
 On a une erreur qui se répéte liée au container postgres : 
 ![image](https://github.com/user-attachments/assets/2a19fe93-9f43-461d-8ada-7ce73de5c5ff)
 
+
+# le fonctionnement pour voir les données en pgadmin
+### Étape 1 : Ouvrir pgAdmin
+1. Accédez à [http://localhost:5050](http://localhost:5050) dans votre navigateur.
+2. Connectez-vous avec les identifiants suivants :
+   - **Email** : `admin@example.com`
+   - **Mot de passe** : `admin`
+
+### Étape 2 : Connectez-vous à votre serveur PostgreSQL
+1. Dans le panneau de gauche, faites un clic droit sur **Servers** et sélectionnez **Create → Server...**.
+2. Remplissez les informations suivantes :
+   - **Onglet General** : Donnez un nom à votre serveur, par exemple : `Postgres`.
+   - **Onglet Connection** :
+     - **Hostname/Address** : `postgres` (correspond au nom de service dans votre fichier `docker-compose.yml`).
+     - **Port** : `5432`.
+     - **Maintenance Database** : `mydatabase`.
+     - **Username** : `myuser`.
+     - **Password** : `mypassword`.
+3. Cliquez sur **Save**.
+
+### Étape 3 : Naviguez vers la base de données
+1. Dans le panneau de gauche, développez l’arborescence **Servers** :
+   - Cliquez sur votre serveur (par exemple : `Postgres`).
+   - Développez **Databases**.
+   - Sélectionnez votre base de données : `mydatabase`.
+
+### Étape 4 : Ouvrir l’outil de requêtes
+1. Développez **Schemas → public → Tables**.
+2. Vous devriez voir votre table `weather_data` dans la liste.
+3. Faites un clic droit sur `weather_data` et sélectionnez **Query Tool**.
+   - Vous pouvez également cliquer sur le menu **Tools** en haut, puis choisir **Query Tool**.
+
+### Étape 5 : Exécuter une requête pour voir les données
+1. Dans l’éditeur de requêtes, saisissez la commande SQL suivante :
+   ```sql
+   SELECT * FROM weather_data;
+   ```
+2. Cliquez sur l'icône en forme d'éclair (ou appuyez sur F5) pour exécuter la requête.
+### Étape 6 : Vérifier les résultats
+Les résultats de la requête apparaîtront dans le panneau de sortie en bas.
+Vous devriez voir les données insérées, par exemple
+   ```plaintext
+   time                  | temperature | humidity | weather
+----------------------+-------------+----------+--------
+2024-12-21 11:00:00  | 25.3        | 60       | Sunny
+   ```
