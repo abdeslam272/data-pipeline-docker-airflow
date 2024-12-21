@@ -20,11 +20,11 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_HOST: postgres
-      DATABASE_PORT: 5432
-      DATABASE_USER: myuser
-      DATABASE_PASSWORD: mypassword
-      DATABASE_NAME: mydatabase
+      DB_HOST: "postgres"
+      DB_PORT: "5432"
+      DB_NAME: "mydatabase"
+      DB_USER: "myuser"
+      DB_PASSWORD: "mypassword"
     volumes:
       - ./app:/app
       
