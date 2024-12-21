@@ -1,7 +1,12 @@
+import os
 import json
 
 def clean_and_transform():
     try:
+        # Ensure the directory exists
+        if not os.path.exists("data"):
+            os.makedirs("data")
+        
         with open("data/raw_data.json", "r") as file:
             data = json.load(file)
 
