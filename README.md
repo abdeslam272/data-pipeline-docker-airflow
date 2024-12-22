@@ -99,3 +99,27 @@ Vous devriez voir les données insérées, par exemple
 ----------------------+-------------+----------+--------
 2024-12-21 11:00:00  | 25.3        | 60       | Sunny
    ```
+
+# Airflow
+Apache Airflow is a platform to programmatically author, schedule, and monitor workflows.
+
+## Features:
+Define task dependencies.
+Configure task retries in case of failures.
+Integrate with other tools through Connections.
+
+## Core Components
+### Webserver
+Provides the Airflow UI.
+Enables monitoring and troubleshooting of data pipelines.
+### Scheduler
+Determines when tasks should run based on dependencies and schedules.
+### Metadata Database
+Serves as the memory of Airflow, storing workflow states and metadata.
+Commonly uses PostgreSQL or MySQL.
+### Executor
+Defines how tasks are executed (e.g., locally, in a cluster, or via Kubernetes).
+### Worker
+Executes tasks assigned by the Scheduler through the Executor.
+### Triggers
+Manages tasks that wait for external events to complete before continuing.
