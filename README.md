@@ -123,3 +123,22 @@ Defines how tasks are executed (e.g., locally, in a cluster, or via Kubernetes).
 Executes tasks assigned by the Scheduler through the Executor.
 ### Triggers
 Manages tasks that wait for external events to complete before continuing.
+
+## Core Components
+### DAG
+Directed Acyclic graph
+Aucun cycle
+Une seule direction
+### Operator
+Les opérateurs encapsulent les tâches et permettent de définir les actions à effectuer
+Permet d'écrire de nombreuses tâches sans coder
+#### Action Operator
+Exécutent une action spécifique
+#### Transfom Operator
+Effectuent le transfert de données entre systèmes
+#### sensor opertors 
+Attendent une certaine condition
+#### Trigger-Deferrable Operators 
+Capteurs qui ne bloquent pas un worker
+#### Custom Operatos
+Créés pour des besoins spécifiques
