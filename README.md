@@ -110,19 +110,19 @@ Integrate with other tools through Connections.
 
 ## Core Components
 ### Webserver
-Provides the Airflow UI.
-Enables monitoring and troubleshooting of data pipelines.
+Fournit l'interface utilisateur d'Airflow.
+Permet de surveiller et de résoudre les problèmes des pipelines de données.
 ### Scheduler
-Determines when tasks should run based on dependencies and schedules.
+Détermine quand les tâches doivent être exécutées en fonction des dépendances et des calendriers.
 ### Metadata Database
-Serves as the memory of Airflow, storing workflow states and metadata.
-Commonly uses PostgreSQL or MySQL.
+Sert de mémoire à Airflow, stockant les états des workflows et les métadonnées.
+Utilise fréquemment PostgreSQL ou MySQL.
 ### Executor
-Defines how tasks are executed (e.g., locally, in a cluster, or via Kubernetes).
+Définit comment les tâches sont exécutées (par exemple : localement, dans un cluster ou via Kubernetes).
 ### Worker
-Executes tasks assigned by the Scheduler through the Executor.
+Exécute les tâches assignées par le Planificateur via l'Exécuteur.
 ### Triggers
-Manages tasks that wait for external events to complete before continuing.
+Gère les tâches qui attendent la réalisation d'événements externes avant de continuer.
 
 ## Core Components
 ### DAG
