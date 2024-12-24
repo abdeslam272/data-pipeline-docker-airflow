@@ -142,3 +142,9 @@ Attendent une certaine condition
 Capteurs qui ne bloquent pas un worker
 #### Custom Operatos
 Créés pour des besoins spécifiques
+
+## Airflow & Docker 
+To deploy Airflow on Docker Compose, you should fetch docker-compose.yaml.
+   ```
+   curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.10.4/docker-compose.yaml'
+   ```
