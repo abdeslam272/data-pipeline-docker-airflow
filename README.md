@@ -148,3 +148,10 @@ To deploy Airflow on Docker Compose, you should fetch docker-compose.yaml.
    ```
    curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.10.4/docker-compose.yaml'
    ```
+the command is to start the container:
+   ```
+   docker-compose up airflow-init
+   docker-compose up -d
+   ```
+
+https://devblogit.com/apache-airflow-tutorial-architecture-concepts-and-how-to-run-airflow-locally-with-docker
