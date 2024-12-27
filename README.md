@@ -155,3 +155,13 @@ the command is to start the container:
    ```
 
 https://devblogit.com/apache-airflow-tutorial-architecture-concepts-and-how-to-run-airflow-locally-with-docker
+
+## Build our first DAG
+### DAG Parameters
+dag_id: A unique identifier for your DAG. If duplicated, Airflow assigns a random one instead of throwing an error.
+description: A brief explanation of your DAG's purpose for easier understanding.
+start_date: The date and time when the DAG begins running.
+schedule_interval: Defines how often the DAG runs (e.g., daily, hourly).
+catchup:
+True: Airflow will run all missed executions since the start_date.
+False: Airflow will skip missed executions and only run the most recent instance.
