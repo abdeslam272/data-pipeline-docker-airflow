@@ -156,12 +156,14 @@ the command is to start the container:
 
 https://devblogit.com/apache-airflow-tutorial-architecture-concepts-and-how-to-run-airflow-locally-with-docker
 
-## Build our first DAG
-### DAG Parameters
-dag_id: A unique identifier for your DAG. If duplicated, Airflow assigns a random one instead of throwing an error.
-description: A brief explanation of your DAG's purpose for easier understanding.
-start_date: The date and time when the DAG begins running.
-schedule_interval: Defines how often the DAG runs (e.g., daily, hourly).
-catchup:
-True: Airflow will run all missed executions since the start_date.
-False: Airflow will skip missed executions and only run the most recent instance.
+## Créer notre premier DAG
+
+### Paramètres du DAG
+- **dag_id** : Identifiant unique pour votre DAG. S'il est dupliqué, Airflow en attribuera un aléatoire sans afficher d'erreur.  
+- **description** : Une courte description de l'objectif de votre DAG pour une meilleure compréhension.  
+- **start_date** : La date et l'heure à partir desquelles le DAG commencera à s'exécuter.  
+- **schedule_interval** : Détermine la fréquence d'exécution du DAG (par exemple, quotidien, horaire).  
+- **catchup** :  
+  - `True` : Airflow exécutera toutes les exécutions manquées depuis la `start_date`.  
+  - `False` : Airflow ignorera les exécutions manquées et ne lancera que l'instance la plus récente.  
+
