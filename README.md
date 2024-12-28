@@ -167,3 +167,17 @@ https://devblogit.com/apache-airflow-tutorial-architecture-concepts-and-how-to-r
   - `True` : Airflow exécutera toutes les exécutions manquées depuis la `start_date`.  
   - `False` : Airflow ignorera les exécutions manquées et ne lancera que l'instance la plus récente.  
 
+## Points importants à connaître
+
+1. **Fuseau horaire par défaut** :  
+   Le fuseau horaire par défaut dans Airflow est **UTC**. Vous pouvez ajuster ce paramètre dans le fichier `airflow.cfg` ou par DAG selon vos besoins.
+
+2. **Comprendre l'exécution des tâches** :  
+   Dans Airflow, l'exécution des tâches est planifiée en fonction de la **date de début** (*start date*) et de l'**intervalle de planification** (*schedule interval*). Notez que l'exécution réelle d'une tâche correspond à la **date de début plus l'intervalle de planification**.  
+   Par exemple, si un DAG a une date de début fixée au `2024-01-01` et un intervalle quotidien, la première exécution aura lieu pour la date **2024-01-02**.
+
+3. **Intervalle de planification : `timedelta` vs. expressions Cron (`* * * * *`)** :  
+   - **`timedelta`** : Cet objet Python permet de définir des intervalles de temps de manière programmatique (par exemple, `schedule_interval=timedelta(days=1)` pour une planification quotidienne).  
+   - **Expressions Cron** : Elles offrent un moyen plus flexible de définir des plannings grâce à une syntaxe spécifique (par exemple, `schedule_interval="0 0 * * *"` pour une exécution quotidienne à minuit).  
+   - Le choix entre ces deux méthodes dépend de la complexité de votre planification. Utilisez `timedelta` pour des intervalles simples et les expressions Cron pour des plannings plus complexes.
+
