@@ -181,3 +181,49 @@ https://devblogit.com/apache-airflow-tutorial-architecture-concepts-and-how-to-r
    - **Expressions Cron** : Elles offrent un moyen plus flexible de définir des plannings grâce à une syntaxe spécifique (par exemple, `schedule_interval="0 0 * * *"` pour une exécution quotidienne à minuit).  
    - Le choix entre ces deux méthodes dépend de la complexité de votre planification. Utilisez `timedelta` pour des intervalles simples et les expressions Cron pour des plannings plus complexes.
 
+## Création d'un DAG et d'une tâche
+
+J'ai créé un DAG nommé `myfirstdag.py` avec une tâche pour créer une table dans PostgreSQL :
+
+```python
+from airflow import DAG
+from datetime import datetime, timedelta
+from airflow.providers.postgres.operators.postgres import PostgresOperator
+
+# Définir le DAG
+with DAG(
+    dag_id="myfirstdag",
+    description="C'est mon premier DAG",
+    start_date=datetime(2024, 12, 27, 10, 0),
+    schedule_interval="*/5 * * * *",
+    catchup=False,
+    dagrun_timeout=timedelta(minutes=45),
+    tags=["sales", "monthly"]
+) as dag:
+    create_table = PostgresOperator(
+        task_id="create_table",
+        postgres_conn_id="postgres_conn",
+        sql='''
+        CREATE TABLE IF NOT EXISTS customers(
+        customer_id VARCHAR(50) NOT NULL,
+        customer_name VARCHAR NOT NULL,
+        address VARCHAR NOT NULL,
+        birth_date DATE NOT NULL
+        );
+        '''
+    )
+```
+Une fois que vous avez créé le fichier, ouvrez Command Prompt ou PowerShell, puis lancez le planificateur Airflow avec la commande suivante :
+```Powershell
+docker exec -it airflow-airflow-scheduler-1 /bin/bash
+```
+
+Ensuite, vous pouvez tester la tâche en exécutant la commande suivante :
+
+```Powershell
+airflow tasks test myfirstdag create_table 2024-12-31
+```
+Cela exécutera la tâche create_table pour le DAG myfirstdag à la date spécifiée (ici le 31 décembre 2024).
+
+
+
