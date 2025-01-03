@@ -226,4 +226,53 @@ airflow tasks test myfirstdag create_table 2024-12-31
 Cela exécutera la tâche create_table pour le DAG myfirstdag à la date spécifiée (ici le 31 décembre 2024).
 
 
+## Problème de Configuration 
 
+### Description de l'erreur
+Lors de l'accès à l'interface utilisateur d'Airflow, l'erreur suivante apparaît : 
+
+> **Airflow Configuration**  
+> Your Airflow administrator chose not to expose the configuration, most likely for security reasons.
+
+### Capture d'écran de l'erreur
+![Configuration Error](https://github.com/user-attachments/assets/510491f0-dc4e-4200-9801-eb43725bb6b8)
+
+---
+
+### Solution
+Pour résoudre ce problème et exposer la configuration dans l'interface web d'Airflow, vous devez définir la variable d'environnement `AIRFLOW__WEBSERVER__EXPOSE_CONFIG` à `True`. Voici les étapes pour y parvenir : 
+
+1. Créez un fichier `.env` dans le répertoire contenant votre fichier `docker-compose.yml` et ajoutez la variable suivante :
+   ```env
+   AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
+   ```
+
+2. Modifiez le fichier docker-compose.yml pour inclure ce fichier .env dans la configuration du service airflow-webserver :
+ ```
+ services:
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+ ```
+3. Redémarrez vos conteneurs Docker pour appliquer les modifications :
+
+```bash
+docker-compose down
+docker-compose up -d
+ ```
+Après ces étapes, la configuration d'Airflow devrait être visible depuis l'interface web.
