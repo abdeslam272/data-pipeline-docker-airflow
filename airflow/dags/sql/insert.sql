@@ -1,0 +1,1 @@
+INSERT INTO customers values ('123', 'Ahmed', 'Morocco', '2000-01-01')
