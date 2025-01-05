@@ -1,6 +1,9 @@
 from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.providers.postgres.operators.postgres import PostgresOperator
+from airflow.models import Variable
+
+
 
 # Define the DAG
 with DAG(
@@ -15,14 +18,7 @@ with DAG(
     create_table=PostgresOperator(
         task_id="create_table",
         postgres_conn_id="postgres_conn",
-        sql='''
-        CREATE TABLE IF NOT EXISTS customers(
-        customer_id varchar(50) NOT NULL,
-        customer_name VARCHAR NOT NULL,
-        addres VARCHAR NOT NULL,
-        birth_date DATE NOT NULL
-        );
-        '''
+        sql='/sql/create_customer.sql'
     )
 
     insert_values=PostgresOperator(
@@ -30,3 +26,14 @@ with DAG(
         postgres_conn_id="postgres_conn",
         sql='/sql/insert.sql',
     )
+
+    select_values=PostgresOperator(
+        task_id="select_values",
+        postgres_conn_id="postgres_conn",
+        sql=''' select * from customers where birth_date between %(start_date)s and %(end_date)s ''',
+        parameters={
+            "start_date" : "{{var.value.start_date}}", "end_date" : "{{var.value.end_date}}"
+        }
+    )
+
+    create_table >> insert_values >> select_values
