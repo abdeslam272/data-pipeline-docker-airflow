@@ -276,3 +276,18 @@ docker-compose down
 docker-compose up -d
  ```
 Après ces étapes, la configuration d'Airflow devrait être visible depuis l'interface web.
+
+## Sensors dans Apache Airflow
+
+Les **Sensors** dans Apache Airflow sont des opérateurs spéciaux qui permettent de surveiller et d'attendre qu'un événement particulier se produise. Une fois l'événement détecté, le capteur déclenche l'exécution de la tâche suivante dans le DAG.
+
+### Types de Sensors
+1. **File Sensor**  
+   Ce capteur vérifie si un fichier spécifique est disponible dans un dossier donné. Par exemple, lorsqu'un fichier attendu arrive dans le répertoire cible, le capteur déclenche l'exécution de la prochaine tâche.
+
+2. **SQL Sensor**  
+   Ce capteur surveille une base de données pour vérifier si un enregistrement particulier existe. Par exemple, dans un scénario où vous chargez des données quotidiennement, le capteur peut vérifier si un enregistrement attendu est arrivé. En cas d'absence de données, il peut émettre une alerte ou effectuer une autre action.
+
+### Utilisation
+Les Sensors sont particulièrement utiles dans les workflows dépendant d'événements externes, comme l'arrivée de fichiers ou la disponibilité de données spécifiques dans une base de données.
+
