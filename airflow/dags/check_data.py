@@ -3,9 +3,20 @@ from datetime import datetime, timedelta
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.sensors.sql import SqlSensor
 from airflow.operators.python import PythonOperator
+from airflow.operators.email import EmailOperator
+from airflow.utils.trigger_rule import TriggerRule
+from dotenv import load_dotenv
+import os
+
 
 def proscessing_data():
     print("record exists")
+
+# Charger les variables d'environnement
+load_dotenv()
+
+# Récupérer l'adresse e-mail depuis le fichier .env
+email_to = os.getenv("EMAIL_TO")
 
 # Define the DAG
 with DAG(
@@ -33,4 +44,12 @@ with DAG(
         python_callable=proscessing_data
     )
 
-    check_records >> proscessing_data
+    task_alert=EmailOperator(
+        task_id = "task_alert",
+        to=email_to,
+        subject="Task failure Alert",
+        html_content="One of the tasks failed! please check it!",
+        trigger_rule=TriggerRule.ONE_FAILED
+    )
+
+    check_records >> [proscessing_data,task_alert]
