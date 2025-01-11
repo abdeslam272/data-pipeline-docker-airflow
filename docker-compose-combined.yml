@@ -1,0 +1,108 @@
+version: '3.8'
+
+# Réseaux partagés pour communication entre les services
+networks:
+  shared_network:
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+  airflow_postgres_data:
+
+services:
+  # Service PostgreSQL partagé
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - shared_network
+
+  # Application Python
+  python-app:
+    build:
+      context: .
+    container_name: python-app
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: "postgres"
+      DB_PORT: "5432"
+      DB_NAME: "mydatabase"
+      DB_USER: "myuser"
+      DB_PASSWORD: "mypassword"
+    volumes:
+      - ./app:/app
+    networks:
+      - shared_network
+
+  # PgAdmin pour gérer PostgreSQL
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - shared_network
+
+  # Redis pour Airflow
+  redis:
+    image: redis:7.2-bookworm
+    container_name: redis
+    expose:
+      - "6379"
+    networks:
+      - shared_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      retries: 5
+
+  # Airflow Webserver
+  airflow-webserver:
+    image: apache/airflow:2.10.4
+    container_name: airflow-webserver
+    environment:
+      AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://myuser:mypassword@postgres/mydatabase
+      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://myuser:mypassword@postgres/mydatabase
+      AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
+      AIRFLOW__CORE__FERNET_KEY: "fernet-key"
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - shared_network
+
+  # Airflow Scheduler
+  airflow-scheduler:
+    image: apache/airflow:2.10.4
+    container_name: airflow-scheduler
+    environment:
+      AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://myuser:mypassword@postgres/mydatabase
+      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://myuser:mypassword@postgres/mydatabase
+      AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
+      AIRFLOW__CORE__FERNET_KEY: "fernet-key"
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - shared_network
