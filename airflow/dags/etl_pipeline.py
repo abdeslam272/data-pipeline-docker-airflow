@@ -2,24 +2,19 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
 
-# Configuration du DAG
-default_args = {
-    "owner": "airflow",
-    "depends_on_past": False,
-    "retries": 1,
-    "retry_delay": timedelta(minutes=5),
-}
-
+# Define the DAG
 with DAG(
-    "simple_weather_pipeline",
-    default_args=default_args,
-    description="Exécuter api_handler.py avec Airflow",
-    schedule_interval=timedelta(hours=1),  # Exécution toutes les heures
-    start_date=datetime(2024, 12, 14),
-    catchup=False,
+    dag_id="simple_weather_pipeline",  # Identifiant unique du DAG
+    description="This is my DAG to orchestrate the data from API to PostgreSQL",
+    start_date=datetime(2025, 1, 12, 0, 0),  # Date et heure de début
+    schedule_interval="0 */3 * * *",  # Toutes les 3 heures
+    catchup=False,  # Éviter l'exécution rétroactive
+    dagrun_timeout=timedelta(minutes=45),  # Timeout pour chaque run
+    tags=["hourly", "weather"],  # Tags pour le classement
 ) as dag:
 
-    run_script = BashOperator(
+    # Exemple de tâche pour exécuter un script Python
+    run_api_handler = BashOperator(
         task_id="run_api_handler",
         bash_command="python /app/api_handler.py",
     )
