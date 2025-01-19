@@ -319,3 +319,5 @@ je peux voir la data dans de la table Weather_data in pgadmin
  ```bash
 docker-compose -f docker-compose.yaml up --build
  ```
+Ce lien pour avoir le docker compose de airflow:
+https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html
