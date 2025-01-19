@@ -291,3 +291,31 @@ Les **Sensors** dans Apache Airflow sont des opérateurs spéciaux qui permetten
 ### Utilisation
 Les Sensors sont particulièrement utiles dans les workflows dépendant d'événements externes, comme l'arrivée de fichiers ou la disponibilité de données spécifiques dans une base de données.
 
+
+
+# Unification de projet 
+Avec un contenu de fichier .env:
+DB_HOST=postgres
+DB_PORT=5432
+DB_NAME=my_database
+DB_USER=my_user
+DB_PASSWORD=my_password
+POSTGRES_USER=airflow
+POSTGRES_PASSWORD=airflow
+POSTGRES_DB=airflow
+
+j'arrive pas a voir la table Weather_data
+Avec 
+.env :
+DB_HOST=postgres
+DB_PORT=5432
+DB_NAME=my_database
+DB_USER=my_user
+DB_PASSWORD=my_password
+
+je peux voir la data dans de la table Weather_data in pgadmin
+
+## Command
+ ```bash
+docker-compose -f docker-compose.yaml up --build
+ ```
