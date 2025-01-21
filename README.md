@@ -325,3 +325,30 @@ docker-compose -f docker-compose.yaml down
 
 Ce lien pour avoir le docker compose de airflow:
 https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html
+
+
+## Problèmes dans les scripts Python
+
+### Erreur rencontrée
+Lors de l'exécution du script, j'ai rencontré l'erreur suivante :  
+![Erreur Python](https://github.com/user-attachments/assets/f6472fa2-d58b-4c31-9223-0354f3aaae2a)
+
+---
+
+### Solution
+
+1. **Vérifier la commande utilisée dans le Dockerfile**  
+   Assurez-vous que la commande de démarrage est correctement configurée pour exécuter le script Python. La ligne suivante dans le fichier Dockerfile doit être correcte :
+   ```dockerfile
+   CMD ["bash", "-c", "python api_handler.py"]
+   ```
+2. **Configurer le fichier docker-compose.yml pour charger les variables d'environnement**
+Ajoutez l'option env_file dans votre fichier docker-compose.yml pour inclure les variables d'environnement depuis un fichier .env :
+   ```yml
+services:
+  python-app:
+    build:
+      context: .
+    env_file:
+      - .env
+   ```
