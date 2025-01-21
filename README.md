@@ -345,10 +345,10 @@ Lors de l'exécution du script, j'ai rencontré l'erreur suivante :
 2. **Configurer le fichier docker-compose.yml pour charger les variables d'environnement**
 Ajoutez l'option env_file dans votre fichier docker-compose.yml pour inclure les variables d'environnement depuis un fichier .env :
    ```yml
-services:
-  python-app:
-    build:
-      context: .
-    env_file:
-      - .env
+   services:
+     python-app:
+       build:
+         context: .
+       env_file:
+         - .env
    ```
