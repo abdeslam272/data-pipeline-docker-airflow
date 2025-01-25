@@ -353,8 +353,9 @@ Ajoutez l'option env_file dans votre fichier docker-compose.yml pour inclure les
          - .env
    ```
 
+## Airflow Errors:
 
 
 
-   ![image](https://github.com/user-attachments/assets/eccbd622-7da1-4a2a-aa87-74ee8420f5fc)
+![image](https://github.com/user-attachments/assets/8db6fbd3-0982-400f-bb7f-acb908a21e50)
 
