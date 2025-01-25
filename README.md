@@ -355,7 +355,7 @@ Ajoutez l'option env_file dans votre fichier docker-compose.yml pour inclure les
 
 ## Airflow Errors:
 
-
-
 ![image](https://github.com/user-attachments/assets/8db6fbd3-0982-400f-bb7f-acb908a21e50)
 
+## A perhaps Solution:
+On fait une conversion de la logique api_handler.py en un DAG Airflow.
