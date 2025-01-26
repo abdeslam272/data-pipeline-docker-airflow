@@ -354,11 +354,11 @@ Ajoutez l'option env_file dans votre fichier docker-compose.yml pour inclure les
    ```
 
 ## Airflow Errors:
-
+Nous avons rencontré un problème où Airflow n’arrivait pas à localiser le fichier api_handler.py pour l’exécuter comme un DAG.
 ![image](https://github.com/user-attachments/assets/8db6fbd3-0982-400f-bb7f-acb908a21e50)
 
-## A perhaps Solution:
-On fait une conversion de la logique api_handler.py en un DAG Airflow.
+## Une solution Possible:
+Nous avons décidé de convertir la logique du fichier api_handler.py en un DAG natif d’Airflow.
 
-Et Oui cette solution il a marché et 
+Bonne nouvelle : cette solution a fonctionné avec succès !
 ![image](https://github.com/user-attachments/assets/b7cb1aed-42d8-46c8-802b-319857126d43)
