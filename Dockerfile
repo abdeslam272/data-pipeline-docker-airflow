@@ -13,4 +13,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app /app
 
 # Spécifier la commande par défaut
-CMD ["bash", "-c", "python api_handler.py && python data_transformer.py && python db_loader.py"]
+# CMD ["bash", "-c", "python api_handler.py && python data_transformer.py && python db_loader.py"]
+CMD ["bash", "-c", "python api_handler.py"]
