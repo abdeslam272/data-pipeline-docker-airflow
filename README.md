@@ -359,3 +359,6 @@ Ajoutez l'option env_file dans votre fichier docker-compose.yml pour inclure les
 
 ## A perhaps Solution:
 On fait une conversion de la logique api_handler.py en un DAG Airflow.
+
+Et Oui cette solution il a marché et 
+![image](https://github.com/user-attachments/assets/b7cb1aed-42d8-46c8-802b-319857126d43)
