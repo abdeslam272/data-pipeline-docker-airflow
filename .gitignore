@@ -40,6 +40,9 @@ data.db
 
 # Airflow logs (si vous utilisez Airflow dans le projet)
 airflow_logs/
+logs/
+config/
+plugins/
 
 # System files
 .DS_Store

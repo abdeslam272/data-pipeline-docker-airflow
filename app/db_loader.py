@@ -7,9 +7,9 @@ load_dotenv()
 
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = os.getenv("DB_PORT", "5432")
-DB_NAME = os.getenv("DB_NAME", "my_database")
-DB_USER = os.getenv("DB_USER", "my_user")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "my_password")
+DB_NAME = os.getenv("DB_NAME", "airflow")
+DB_USER = os.getenv("DB_USER", "airflow")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "airflow")
 
 # Attempt to connect to the database
 try:

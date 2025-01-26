@@ -16,5 +16,5 @@ with DAG(
     # Exemple de tâche pour exécuter un script Python
     run_api_handler = BashOperator(
         task_id="run_api_handler",
-        bash_command="python /app/api_handler.py",
+        bash_command="python app/api_handler.py",
     )
