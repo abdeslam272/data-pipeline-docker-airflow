@@ -7,26 +7,21 @@
 # Structure du projet
 ``` plaintext
 data-pipeline-docker-airflow/
+├── dags/
+│   ├── etl_pipeline.py       # DAG Airflow pour tester l'ETL en utilisant des scripts Python
+│   ├── dag.py                # DAG Airflow développé directement avec Airflow pour orchestrer l'ETL
 │
-├── airflow/
-│   ├── dags/
-│   │   ├── etl_pipeline.py  # Le DAG Airflow pour orchestrer l'ETL
-│   │
-│   ├── docker-compose.yml   # Fichier Docker-Compose pour configurer Airflow
-│   ├── Dockerfile           # Conteneur principal pour Airflow
-│   └── requirements.txt     # Dépendances Python pour Airflow
+├── app/                      # Dossier contenant les scripts Python de l'ETL
+│   ├── api_handler.py        # Script Python pour extraire les données depuis une API
+│   ├── data_transformer.py   # Script Python pour transformer les données extraites
+│   ├── db_loader.py          # Script Python pour charger les données transformées dans PostgreSQL
 │
-├── app/
-│   ├── api_handler.py       # Script Python pour extraire des données depuis l'API
-│   ├── data_transformer.py  # Script pour transformer les données
-│   ├── db_loader.py         # Script pour charger les données dans PostgreSQL
-│   └── tests/
-│       ├── test_api_handler.py  # Tests pour la récupération des données API
-│       └── test_transformer.py  # Tests pour les transformations de données
-│
-├── docker-compose.yml       # Orchestration multi-services (Airflow + PostgreSQL)
-├── Dockerfile               # Conteneur principal pour vos scripts Python
-└── README.md                # Documentation du projet
+├── .dockerignore             # Fichier pour exclure des fichiers ou dossiers lors de la création de l'image Docker
+├── .gitignore                # Fichier pour exclure des fichiers ou dossiers dans le contrôle de version Git
+├── docker-compose.yml        # Fichier pour orchestrer les services Docker (Airflow, PostgreSQL, etc.)
+├── Dockerfile                # Fichier pour définir l'image Docker principale pour vos scripts Python
+├── requirements.txt          # Fichier listant les dépendances Python nécessaires au projet
+└── README.md                 # Fichier de documentation du projet
 ```
 
 
@@ -66,18 +61,18 @@ On a une erreur qui se répéte liée au container postgres :
 2. Remplissez les informations suivantes :
    - **Onglet General** : Donnez un nom à votre serveur, par exemple : `Postgres`.
    - **Onglet Connection** :
-     - **Hostname/Address** : `postgres` (correspond au nom de service dans votre fichier `docker-compose.yml`).
+     - **Hostname/Address** : `airflow` (correspond au nom de service dans votre fichier `docker-compose.yml`).
      - **Port** : `5432`.
-     - **Maintenance Database** : `mydatabase`.
-     - **Username** : `myuser`.
-     - **Password** : `mypassword`.
+     - **Maintenance Database** : `airflow`.
+     - **Username** : `airflow`.
+     - **Password** : `airflow`.
 3. Cliquez sur **Save**.
 
 ### Étape 3 : Naviguez vers la base de données
 1. Dans le panneau de gauche, développez l’arborescence **Servers** :
    - Cliquez sur votre serveur (par exemple : `Postgres`).
    - Développez **Databases**.
-   - Sélectionnez votre base de données : `mydatabase`.
+   - Sélectionnez votre base de données : `airflow`.
 
 ### Étape 4 : Ouvrir l’outil de requêtes
 1. Développez **Schemas → public → Tables**.
@@ -88,7 +83,7 @@ On a une erreur qui se répéte liée au container postgres :
 ### Étape 5 : Exécuter une requête pour voir les données
 1. Dans l’éditeur de requêtes, saisissez la commande SQL suivante :
    ```sql
-   SELECT * FROM weather_data;
+   SELECT * FROM weather_forecast;
    ```
 2. Cliquez sur l'icône en forme d'éclair (ou appuyez sur F5) pour exécuter la requête.
 ### Étape 6 : Vérifier les résultats
