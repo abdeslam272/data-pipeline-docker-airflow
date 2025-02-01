@@ -352,6 +352,47 @@ Ajoutez l'option env_file dans votre fichier docker-compose.yml pour inclure les
 Nous avons rencontré un problème où Airflow n’arrivait pas à localiser le fichier api_handler.py pour l’exécuter comme un DAG.
 ![image](https://github.com/user-attachments/assets/8db6fbd3-0982-400f-bb7f-acb908a21e50)
 
+
+---
+
+## 📚 Astuces et Leçons Apprises  
+
+### ✅ Airflow & DAGs  
+- Un **DAG** (Directed Acyclic Graph) est un workflow composé de **tâches interdépendantes**.  
+- `PythonOperator` permet d'exécuter directement du code Python.  
+- **Utiliser `op_kwargs`** pour passer des arguments à une fonction Python dans un DAG.  
+- Toujours définir **`start_date=datetime(202X, X, X)`** pour éviter une exécution immédiate de tous les jobs passés.  
+- **Désactiver `catchup=True`** si l’on ne veut pas rattraper les exécutions passées.  
+
+### ✅ Docker & Orchestration  
+- **Docker Compose** est idéal pour orchestrer Airflow et PostgreSQL ensemble.  
+- **Utiliser `.dockerignore`** pour éviter d'inclure des fichiers inutiles dans l’image Docker.  
+- **Toujours vérifier les logs avec `docker-compose logs -f airflow-scheduler`** en cas de problème.  
+
+### ✅ PostgreSQL & Gestion des Données  
+- **Utiliser `psycopg2`** pour interagir avec une base PostgreSQL en Python.  
+- **Gérer les erreurs avec `try-except`** pour éviter des interruptions de pipeline.  
+- **Créer automatiquement les tables** pour éviter les erreurs de chargement.  
+
+### ✅ Sécurité et Bonnes Pratiques  
+- **Stocker les clés API et identifiants de la base de données dans un fichier `.env`**.  
+- **Ne jamais versionner `.env`**, le lister dans `.gitignore`.  
+- **Utiliser des logs et des messages d'erreur explicites** pour faciliter le debugging.  
+
+---
+
+## 📌 Résumé des Technologies Utilisées  
+
+| 🔧 Technologie | 📜 Usage |
+|--------------|--------|
+| **Apache Airflow** | Orchestration et automatisation du pipeline de données |
+| **Python** | Développement des scripts ETL |
+| **PostgreSQL** | Stockage des données météorologiques |
+| **Docker & Docker Compose** | Conteneurisation et orchestration des services |
+| **psycopg2** | Connexion à PostgreSQL depuis Python |
+| **requests** | Requêtes API pour récupérer les données météo |
+
+
 ## Une solution Possible:
 Nous avons décidé de convertir la logique du fichier api_handler.py en un DAG natif d’Airflow.
 
