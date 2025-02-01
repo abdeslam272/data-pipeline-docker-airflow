@@ -353,6 +353,12 @@ Nous avons rencontré un problème où Airflow n’arrivait pas à localiser le 
 ![image](https://github.com/user-attachments/assets/8db6fbd3-0982-400f-bb7f-acb908a21e50)
 
 
+## Une solution Possible:
+Nous avons décidé de convertir la logique du fichier api_handler.py en un DAG natif d’Airflow.
+
+Bonne nouvelle : cette solution a fonctionné avec succès !
+![image](https://github.com/user-attachments/assets/b7cb1aed-42d8-46c8-802b-319857126d43)
+
 ---
 
 ## 📚 Astuces et Leçons Apprises  
@@ -392,9 +398,3 @@ Nous avons rencontré un problème où Airflow n’arrivait pas à localiser le 
 | **psycopg2** | Connexion à PostgreSQL depuis Python |
 | **requests** | Requêtes API pour récupérer les données météo |
 
-
-## Une solution Possible:
-Nous avons décidé de convertir la logique du fichier api_handler.py en un DAG natif d’Airflow.
-
-Bonne nouvelle : cette solution a fonctionné avec succès !
-![image](https://github.com/user-attachments/assets/b7cb1aed-42d8-46c8-802b-319857126d43)
